@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { APIKey } from "../config/key"
 import { Campeoes, Container, Invocador } from "./style"
 import maestria1Img from '../assets/maestria-1.webp'
 import maestria2Img from '../assets/maestria-2.webp'
@@ -56,7 +55,7 @@ function Home() {
   }, [])
 
   useEffect(() => {
-    fetch(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${nickPesquisa}?api_key=${APIKey}`)
+    fetch(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${nickPesquisa}?api_key=${process.env.REACT_APP_API_KEY}`)
       .then(response => response.json())
       .then(data => {
 
@@ -80,7 +79,7 @@ function Home() {
 
   useEffect(() => {
     if (invocadorData.id) {
-      fetch(`https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${invocadorData.id}?api_key=${APIKey}`)
+      fetch(`https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${invocadorData.id}?api_key=${process.env.REACT_APP_API_KEY}`)
           .then(response => response.json())
           .then(data => {
             setInvocadorMaestrias(data)
